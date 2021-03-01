@@ -6,7 +6,6 @@ import { useState, useEffect } from '@wordpress/element';
 import { CART_STORE_KEY as storeKey } from '@woocommerce/block-data';
 import { useDebounce } from 'use-debounce';
 import { useCheckoutContext } from '@woocommerce/base-context';
-import { triggerFragmentRefresh } from '@woocommerce/base-utils';
 
 /**
  * Internal dependencies
@@ -71,11 +70,7 @@ export const useStoreCartItemQuantity = ( cartItem ) => {
 	const previousIsPendingDelete = usePrevious( isPendingDelete );
 
 	const removeItem = () => {
-		return cartItemKey
-			? removeItemFromCart( cartItemKey ).then( () => {
-					triggerFragmentRefresh();
-			  } )
-			: false;
+		return cartItemKey ? removeItemFromCart( cartItemKey ) : false;
 	};
 
 	// Observe debounced quantity value, fire action to update server on change.
@@ -85,9 +80,7 @@ export const useStoreCartItemQuantity = ( cartItem ) => {
 			Number.isFinite( previousDebouncedQuantity ) &&
 			previousDebouncedQuantity !== debouncedQuantity
 		) {
-			changeCartItemQuantity( cartItemKey, debouncedQuantity ).then(
-				triggerFragmentRefresh
-			);
+			changeCartItemQuantity( cartItemKey, debouncedQuantity );
 		}
 	}, [
 		cartItemKey,

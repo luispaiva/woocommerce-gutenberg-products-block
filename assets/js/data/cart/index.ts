@@ -12,7 +12,8 @@ import * as selectors from './selectors';
 import * as actions from './actions';
 import * as resolvers from './resolvers';
 import reducer from './reducers';
-import { controls } from '../shared-controls';
+import { controls } from './controls';
+import { controls as sharedControls } from '../shared-controls';
 
 registerStore( STORE_KEY, {
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
@@ -21,7 +22,7 @@ registerStore( STORE_KEY, {
 	actions,
 	// eslint-disable-next-line @typescript-eslint/ban-ts-comment
 	// @ts-ignore -- not sure how to resolve the type issues here.
-	controls: { ...dataControls, ...controls },
+	controls: { ...dataControls, ...sharedControls, ...controls },
 	selectors,
 	resolvers,
 } );
