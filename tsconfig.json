@@ -4,6 +4,6 @@
   "exclude": [ "./assets/js/data" ],
   "references": [
 	{ "path": "./assets/js/data" },
-	{ "path":  "/assets/js/base/components" }
+	{ "path": "./assets/js/base/components" }
   ]
 }
